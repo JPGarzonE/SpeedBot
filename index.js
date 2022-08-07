@@ -6,6 +6,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 //importing queries 
+//testing
 const activeProposalsFunctions = require('./commands/activeProposals');
 const closedProposalsFunctions = require('./commands/closedProposals');
 
