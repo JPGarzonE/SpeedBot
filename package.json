@@ -24,6 +24,8 @@
     "commands": "^0.0.7",
     "covalentjs": "^0.0.3",
     "discord.js": "^14.1.2",
+    "express": "^4.18.1",
+    "node-cron": "^3.0.1",
     "node-fetch": "^3.2.6"
   },
   "devDependencies": {

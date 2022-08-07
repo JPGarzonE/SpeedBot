@@ -24,25 +24,27 @@ const { posts, store, ethereum } = require('aleph-js');
 //   )
 
 // }
-async function addDAO() {
-  console.log("Add DAO");
-  // account = await ethereum.import_account({ mnemonics: 'decide thumb rally buyer enemy apology awkward roof spatial share song walk' })
-  // console.log("Account: ", account)
-  // return await posts.submit(
-  //   account.address,
-  //   'mytype',
-  //   { 'body': 'I LOVE CODING BUT IS HARD' },
-  //   {
-  //     'account': account,
-  //     'channel': 'TEST',
-  //     'api_server': 'https://api2.aleph.im'
-  //   }
-  // )
+async function addDAO(contractAddress) {
 
-  let item_hash = '74880e1b69a501e8d26099c97caf9caa62691b8f00c9897c323f4f8eb1e9ccb1';
+  account = await ethereum.import_account({ mnemonics: 'decide thumb rally buyer enemy apology awkward roof spatial share song walk' })
+  //TODO BUILD OBJECT
+  return await posts.submit(
+    account.address,
+    'mytype',
+    { 'body': contractAddress },
+    {
+      'account': account,
+      'channel': 'TEST',
+      'api_server': 'https://api2.aleph.im'
+    }
+  )
+
+  // let item_hash = '74880e1b69a501e8d26099c97caf9caa62691b8f00c9897c323f4f8eb1e9ccb1';
+}
+async function getDaoContract(itemHash) {
   let post_type = 'mytype'
   let buffer = await posts.get_posts(post_type, {
-    hashes: [item_hash]
+    hashes: [itemHash]
   })
   let contentText = buffer.posts[0].item_content
   let contentParsed = JSON.parse(contentText).content.body
@@ -51,9 +53,10 @@ async function addDAO() {
   console.log(buffer)
   console.log("<<<STRING")
   console.log(contentParsed)
-
+  return contentParsed
 }
 
 module.exports = {
-  addDAO
+  addDAO,
+  getDaoContract
 }

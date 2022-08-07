@@ -6,10 +6,7 @@ module.exports = {
     .setName('start')
     .setDescription('Set up the addresses of your DAO, we will save it for all your incoming requests.'),
   async execute(interaction) {
-    console.log('Starting...');
-    console.log(interaction)
     const GuildID = interaction.guildId
-    console.log("Guild ID: ", GuildID)
 
     // let response = await CeramicController.addDAO();
     // console.log("Response: ", response);
