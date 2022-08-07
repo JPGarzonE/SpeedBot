@@ -29,7 +29,7 @@ module.exports = {
   async execute(interaction) {
     console.log("Waiting for the proposals...");
     let response = await RequestsController.getOpenProposals()
-    console.log(response)
+    // console.log(response)
     let proposalsString = await createProposalResponse(response.proposals);
 
     await interaction.reply(proposalsString);

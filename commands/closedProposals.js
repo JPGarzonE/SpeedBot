@@ -1,5 +1,5 @@
 // const covalentjs = require('covalentjs');
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require ('discord.js');
 const RequestsController = require('../controllers/requests');
 
 
@@ -9,7 +9,7 @@ const createProposalResponse = (proposals) => {
     for (let index = 0; index < proposals.length; index++) {
       proposalsString = `${proposalsString}\n\n${createProposalTemplate(proposals[index], index + 1)}`;
     }
-    console.log(proposalsString)
+    // console.log(proposalsString)
     resolve(proposalsString)
   });
 };

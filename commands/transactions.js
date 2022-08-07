@@ -1,7 +1,7 @@
 // const covalentjs = require('covalentjs');
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
-const RequestsController = require('../controllers/requests')
+const RequestsController = require('../controllers/requests');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('transactions')
