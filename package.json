@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"commonjs",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/node": "^18.0.6",
     "@walletconnect/node": "^1.0.0",
     "@walletconnect/qrcode-modal": "^1.8.0",
+    "aleph-js": "^0.5.0",
     "axios": "^0.27.2",
     "commands": "^0.0.7",
     "covalentjs": "^0.0.3",

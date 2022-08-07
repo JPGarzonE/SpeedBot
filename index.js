@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const token = process.env['TOKEN'];
-const { Client, Collection, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
@@ -25,8 +25,6 @@ client.once('ready', () => {
   const Guilds = client.guilds.cache.map(guild => guild.id);
   console.log(Guilds);
   console.log('Ready!');
-  console.log(">>>CLIENT")
-  console.log(client)
 });
 
 
@@ -146,4 +144,13 @@ client.on('interactionCreate', async interaction => {
   };
 });
 
+//Interaction with Modals
+client.on('interactionCreate', async (interaction) => {
+  if (interaction.type !== InteractionType.ModalSubmit) return;
+  // Get the data entered by the user
+  const contractAddress = interaction.fields.getTextInputValue('inputAddress');
+
+  await interaction.reply({ content: `${contractAddress}⚡️⚡️Thanks for using SpeeDao⚡️⚡️` }
+  );
+});
 client.login(token);

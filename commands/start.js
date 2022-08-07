@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-const CeramicController = require('../controllers/ceramic.mjs');
+const CeramicController = require('../controllers/ceramic.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,19 +11,20 @@ module.exports = {
     const GuildID = interaction.guildId
     console.log("Guild ID: ", GuildID)
 
-    CeramiController.addDAO();
+    // let response = await CeramicController.addDAO();
+    // console.log("Response: ", response);
     //cREATING A MODAL
 
     const modal = new ModalBuilder()
       .setCustomId('modalAddress')
-      .setTitle('⚡️⚡️Please type the address of the governance contract of your DAO')
+      .setTitle('⚡️⚡️Governance contract')
 
     //CREATING AN INOUT 
     // Create the text input components
     const contractAddressInput = new TextInputBuilder()
       .setCustomId('inputAddress')
       // The label is the prompt the user sees for this input
-      .setLabel("⚡️⚡️Please type the address of the governance contract of your DAO')")
+      .setLabel("⚡️⚡️Type the address  your DAO ( Governance)")
       // Short means only a single line of text
       .setStyle(TextInputStyle.Short);
     //Creting an action 
@@ -31,9 +32,9 @@ module.exports = {
     const firstActionRow = new ActionRowBuilder().addComponents(contractAddressInput);
     //Adding input to the contract 
     modal.addComponents(firstActionRow)
-    
-    //Triggering the modal 
+    // Triggering the modal
     await interaction.showModal(modal);
+    // await interaction.reply({content:"POPO"})
 
   }
 

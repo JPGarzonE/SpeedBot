@@ -1,4 +1,3 @@
-const id = require(process.env['id']);
 const fs = require('node:fs');
 const path = require('node:path');
 const token = process.env['TOKEN']
