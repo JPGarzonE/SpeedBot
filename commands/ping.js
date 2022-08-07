@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } =  require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,6 +9,7 @@ module.exports = {
         .setDescription("Number of pongs returned!")),
   async execute(interaction) {
     console.log('It works and we are rocking!!!');
+    console.log(interaction)
     console.log(interaction.options)
     
     const row = new ActionRowBuilder()

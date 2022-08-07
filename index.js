@@ -1,7 +1,8 @@
 const fs = require('node:fs');
-const path = require('node:path')
+const path = require('node:path');
 const token = process.env['TOKEN'];
 const { Client, Collection, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -17,18 +18,47 @@ for (const file of commandFiles) {
   // adding commands for commands variable in the instance of client
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
+  //import command from filePath;
   client.commands.set(command.data.name, command);
 }
 client.once('ready', () => {
   const Guilds = client.guilds.cache.map(guild => guild.id);
   console.log(Guilds);
   console.log('Ready!');
+  console.log(">>>CLIENT")
+  console.log(client)
 });
 
 
 
 //Slash interactions
 client.on('interactionCreate', async (interaction) => {
+  //common functions
+  async function buttonInteractionRoutine(titleType) {
+    try {
+      let response = await RequestsController.getOpenProposals();
+      console.log("RESPONSE>>>")
+      console.log(response)
+      let proposalsString = await activeProposalsFunctions.createProposalResponse(response.proposals);
+      title = `⚡️⚡️ ${titleType} proposals for: ${response.proposals[0].space.name}-DAO⚡️⚡️\n\n🚀`
+      content = proposalsString;
+      const embed = new EmbedBuilder()
+        .setColor(0x0099FF)
+        .setTitle(title)
+        .setDescription(content);
+      await interaction.reply({ content: '⚡️⚡️Thanks for using SpeeDao⚡️⚡️', embeds: [embed] }
+      );
+    }
+    catch (err) {
+      console.log("ERRORRRRR")
+      console.log(err)
+      await interaction.reply({
+        content: 'There was an error while executing this command',
+        ephemeral: true
+      });
+    }
+  }
+
   if (!interaction.isChatInputCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
@@ -63,55 +93,11 @@ client.on('interactionCreate', async interaction => {
   //Active proposals
 
   if (interaction.customId == "activeP") {
-    try {
-      let response = await RequestsController.getOpenProposals();
-      console.log("RESPONSE>>>")
-      console.log(response)
-      let proposalsString = await activeProposalsFunctions.createProposalResponse(response.proposals);
-      title = `⚡️⚡️ Active proposals for: ${response.proposals[0].space.name}-DAO⚡️⚡️\n\n🚀`
-      content = proposalsString;
-      const embed = new EmbedBuilder()
-        .setColor(0x0099FF)
-        .setTitle(title)
-        .setDescription(content);
-      await interaction.reply({ content: '⚡️⚡️Thanks for using SpeeDao⚡️⚡️', embeds: [embed] }
-      );
-    }
-    catch (err) {
-      console.log("ERRORRRRR")
-      console.log(err)
-      await interaction.reply({
-        content: 'There was an error while executing this command',
-        ephemeral: true
-      });
-    }
+    await buttonInteractionRoutine("Active")
   }
   //Closed proposals 
   if (interaction.customId == "closedP") {
-    try {
-      let response = await RequestsController.getClosedProposals();
-      console.log("RESPONSE>>>")
-      console.log(response)
-      let proposalsString = await closedProposalsFunctions.createProposalResponse(response.proposals);
-      title = `⚡️⚡️ Close proposals for: ${response.proposals[0].space.name}-DAO⚡️⚡️\n\n🚀`
-      content = proposalsString;
-      const embed = new EmbedBuilder()
-        .setColor(0x0099FF)
-        .setTitle(title)
-        .setDescription(content);
-      console.log('RESPONSE >>>>> ')
-      console.log(response)
-      await interaction.reply({ content: '⚡️⚡️Thanks for using SpeeDao⚡️⚡️', embeds: [embed] }
-      );
-    }
-    catch (err) {
-      console.log("PUTO ERRORRRRR")
-      console.log(err)
-      await interaction.reply({
-        content: 'There was an error while executing this command',
-        ephemeral: true
-      });
-    }
+    await buttonInteractionRoutine("Close")
     console.log("Dope")
   };
 
@@ -143,7 +129,21 @@ client.on('interactionCreate', async interaction => {
     }
     console.log("Dope")
   };
-
+  if (interaction.customId == "vote") {
+    try {
+      const web3 = new Web3Provider(window.ethereum);
+      const [account] = await web3.listAccounts();
+    }
+    catch (err) {
+      console.log("PUTO ERRORRRRR")
+      console.log(err)
+      await interaction.reply({
+        content: 'There was an error while executing this command',
+        ephemeral: true
+      });
+    }
+    console.log("Dope")
+  };
 });
 
 client.login(token);

@@ -1,4 +1,4 @@
-const id = process.env['id'];
+const id = require(process.env['id']);
 const fs = require('node:fs');
 const path = require('node:path');
 const token = process.env['TOKEN']
@@ -19,7 +19,6 @@ for (const file of commandFiles) {
 const rest = new REST({ version: '10' }).setToken(token);
 const clientID = '839732718699020298';
 const guildID = '1004818024299233340'; //discord identifier for servers 
-
 
 (async () => {
   try {

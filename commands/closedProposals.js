@@ -1,5 +1,5 @@
 // const covalentjs = require('covalentjs');
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require ('discord.js');
 const RequestsController = require('../controllers/requests');
 
 
