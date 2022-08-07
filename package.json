@@ -1,0 +1,22 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^1.0.1",
+    "@types/node": "^18.0.6",
+    "axios": "^0.27.2",
+    "commands": "^0.0.7",
+    "covalentjs": "^0.0.3",
+    "discord.js": "^14.1.2",
+    "node-fetch": "^3.2.6"
+  }
+}
