@@ -149,7 +149,7 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.type !== InteractionType.ModalSubmit) return;
   // Get the data entered by the user
   const contractAddress = interaction.fields.getTextInputValue('inputAddress');
-
+//TODO RETRIEVE DATA
   await interaction.reply({ content: `${contractAddress}⚡️⚡️Thanks for using SpeeDao⚡️⚡️` }
   );
 });
